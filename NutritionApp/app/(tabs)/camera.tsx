@@ -8,7 +8,7 @@ export default function Camera() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={[styles.text, { color: colors.onBackground }]}>
-        Welcome to the Nutrition & Fitness App!
+        Camera
       </Text>
       <Button
         mode="contained"
