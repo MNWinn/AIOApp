@@ -1,8 +1,6 @@
-// app/Tabs/_layout.tsx
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useTheme } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 
 import HomeScreen from './index';
@@ -10,6 +8,7 @@ import CameraScreen from './camera';
 import ExploreScreen from './explore';
 import DashboardScreen from './dashboard';
 import SignInScreen from '../SignIn';
+import CreateAccountScreen from '../CreateAccount';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useAuth } from '@/context/AuthContext';
@@ -19,7 +18,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function TabLayout() {
-  const theme = useTheme();
   const colorScheme = useColorScheme();
   const appliedTheme = colorScheme === 'dark' ? darkTheme : lightTheme;
 
@@ -77,8 +75,6 @@ function TabLayout() {
 
 export default function MainNavigator() {
   const { user, loading } = useAuth();
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
 
   if (loading) {
     // Return a loading screen here if needed
@@ -86,8 +82,9 @@ export default function MainNavigator() {
   }
 
   return (
-    <Stack.Navigator initialRouteName={"SignIn"}>
+    <Stack.Navigator initialRouteName={user ? "Tabs" : "SignIn"}>
       <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="CreateAccount" component={CreateAccountScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Tabs" component={TabLayout} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
