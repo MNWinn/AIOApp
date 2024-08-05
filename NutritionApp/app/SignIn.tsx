@@ -22,7 +22,7 @@ const SignInScreen: React.FC<Props> = ({ navigation }) => {
     const { colors } = useTheme();
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-        clientId: "no work :(",
+        clientId: "996449526571-i5772pu8uarpugmfa13hak9t0apfpk7i.apps.googleusercontent.com",
     });
 
     useEffect(() => {
