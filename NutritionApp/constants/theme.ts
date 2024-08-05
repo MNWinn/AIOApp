@@ -1,3 +1,4 @@
+// constants/theme.ts
 import { DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
 import { DefaultTheme as PaperDefaultTheme, MD3DarkTheme as PaperDarkTheme } from 'react-native-paper';
 
@@ -26,3 +27,5 @@ export const darkTheme = {
     text: '#FFFFFF',
   },
 };
+
+export type ThemeColors = typeof lightTheme.colors;

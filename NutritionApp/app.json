@@ -7,6 +7,9 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "extra": {
+      "googleWebClientId": "996449526571-i5772pu8uarpugmfa13hak9t0apfpk7i.apps.googleusercontent.com"
+    },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
