@@ -1,20 +1,18 @@
-// app/screens/ProfileScreen.tsx
-
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import { Button, Text, useTheme, ActivityIndicator, Card, Divider } from 'react-native-paper';
 import { getAuth, signOut } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../constants/firebaseConfig'; // Adjust this if the path is different
 
 const ProfileScreen: React.FC = () => {
   const { colors } = useTheme();
   const auth = getAuth();
-  const user = auth.currentUser;
   const navigation = useNavigation();
   const [profileData, setProfileData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -26,22 +24,29 @@ const ProfileScreen: React.FC = () => {
       });
   };
 
+  console.log(auth.currentUser);
+
   useEffect(() => {
     const fetchProfileData = async () => {
+      const user = auth.currentUser;
       if (user) {
+        setLoading(true);
         const docRef = doc(db, 'users', user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setProfileData(docSnap.data());
         } else {
           console.log('No such document!');
+          setProfileData(null);
         }
+        setLoading(false);
       }
-      setLoading(false);
     };
 
-    fetchProfileData();
-  }, [user]);
+    if (isFocused) {
+      fetchProfileData();
+    }
+  }, [isFocused, auth.currentUser]);
 
   if (loading) {
     return (
@@ -52,10 +57,10 @@ const ProfileScreen: React.FC = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView style={[{ backgroundColor: colors.background }]} contentContainerStyle={styles.scrollView}>
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <Text style={[styles.title, { color: colors.onBackground }]}>Profile</Text>
-        {user && profileData ? (
+        {auth.currentUser && profileData ? (
           <Card style={[styles.card, { backgroundColor: colors.surface }]}>
             <Card.Content>
               <Text style={[styles.cardTitle, { color: colors.primary }]}>User Information</Text>
@@ -70,7 +75,7 @@ const ProfileScreen: React.FC = () => {
               </View>
               <View style={styles.infoRow}>
                 <Text style={[styles.infoLabel, { color: colors.onSurface }]}>Email:</Text>
-                <Text style={[styles.infoValue, { color: colors.onSurface }]}>{user.email}</Text>
+                <Text style={[styles.infoValue, { color: colors.onSurface }]}>{auth.currentUser.email}</Text>
               </View>
               <View style={styles.infoRow}>
                 <Text style={[styles.infoLabel, { color: colors.onSurface }]}>Birthday:</Text>

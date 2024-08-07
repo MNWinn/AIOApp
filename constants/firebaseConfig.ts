@@ -2,16 +2,20 @@ import { initializeApp } from 'firebase/app';
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getFirestore } from 'firebase/firestore';
-
+import {
+    FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID,
+    FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGE_SENDER_ID, FIREBASE_APP_ID,
+    FIREBASE_MEASUREMENT_ID
+} from "@env"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGFWG1fD44Tjq3TpA6mSKhWSik2LxKEMg",
-    authDomain: "nutritionapp-a45b5.firebaseapp.com",
-    projectId: "nutritionapp-a45b5",
-    storageBucket: "nutritionapp-a45b5.appspot.com",
-    messagingSenderId: "578990436428",
-    appId: "1:578990436428:web:a5a20073186e5d123a44e9",
-    measurementId: "G-H5ER3X0H0R"
+    apiKey: FIREBASE_API_KEY,
+    authDomain: FIREBASE_AUTH_DOMAIN,
+    projectId: FIREBASE_PROJECT_ID,
+    storageBucket: FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: FIREBASE_MESSAGE_SENDER_ID,
+    appId: FIREBASE_APP_ID,
+    measurementId: FIREBASE_MEASUREMENT_ID
 };
 
 
