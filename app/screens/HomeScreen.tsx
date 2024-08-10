@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { Image, StyleSheet, Platform } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
@@ -11,20 +9,9 @@ export default function HomeScreen() {
   const { colors } = useTheme();
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: colors.background, dark: colors.background }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
+      <><ThemedView style={styles.titleContainer}>
+      <ThemedText type="title">Welcome!</ThemedText>
+    </ThemedView><ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/Tabs/index.tsx</ThemedText> to see changes.
@@ -34,14 +21,12 @@ export default function HomeScreen() {
           </ThemedText>{' '}
           to open developer tools.
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
+      </ThemedView><ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 2: Explore</ThemedText>
         <ThemedText>
           Tap the Explore tab to learn more about what's included in this starter app.
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
+      </ThemedView><ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
         <ThemedText>
           When you're ready, run{' '}
@@ -50,11 +35,9 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
-      </ThemedView>
-      <Button mode="contained" onPress={() => console.log('Button pressed')} style={{ backgroundColor: colors.primary }}>
+      </ThemedView><Button mode="contained" onPress={() => console.log('Button pressed')} style={{ backgroundColor: colors.primary }}>
         Get Started
-      </Button>
-    </ParallaxScrollView>
+      </Button></>
   );
 }
 
